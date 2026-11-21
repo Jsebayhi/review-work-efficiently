@@ -1,0 +1,35 @@
+name: Validate Skill Integrity
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check Frontmatter & Files
+        run: |
+          python3 -c '
+          import os, sys
+          skill_path = "skills/review-work-efficiently/SKILL.md"
+          if not os.path.exists(skill_path):
+              print(f"Error: {skill_path} missing")
+              sys.exit(1)
+          with open(skill_path) as f:
+              content = f.read()
+          if not content.startswith("---"):
+              print("Error: Missing frontmatter")
+              sys.exit(1)
+          print("Skill structure verified successfully.")
+          '
