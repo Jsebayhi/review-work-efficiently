@@ -88,31 +88,7 @@ The core protocol is domain-agnostic. Dedicated attack vectors and Proof-of-Fail
 
 ---
 
-## 6. Repository Layout
-
-```text
-├── README.md
-├── .gitignore
-├── .github/
-│   └── workflows/
-│       └── validate-skill.yml
-├── docs/
-│   ├── 01-theoretical-foundations.md
-│   └── 02-architecture-and-tradeoffs.md
-└── skills/
-    └── review-work-efficiently/
-        ├── SKILL.md
-        └── references/
-            └── domains/
-                ├── software-engineering.md
-                ├── legal-and-contracts.md
-                ├── finance-and-tax.md
-                └── writing-and-research.md
-```
-
----
-
-## 7. Author & License
+## 6. Author & License
 
 Authored and maintained by Jeremy Sebayhi.
 Distributed under the MIT License.
