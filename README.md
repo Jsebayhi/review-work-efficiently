@@ -8,7 +8,7 @@
 
 ## 1. Executive Summary & Purpose
 
-This repository provides an operational blueprint and harness-agnostic skill definition for conducting **dynamic, situation-tailored adversarial reviews** across software, legal contracts, financial declarations, and strategic memos.
+This repository provides an operational blueprint and skill definition for conducting **dynamic, situation-tailored adversarial reviews** across software, legal contracts, financial declarations, and strategic memos.
 
 Rather than relying on a single generalist model to self-review its own output, this protocol establishes a structured framework to compose specialized sub-agents with strict **Proof-of-Failure (PoF)** contracts and context quarantine.
 
@@ -32,11 +32,9 @@ While this skill demonstrates how an agent can dynamically compose and dispatch 
 
 ### The Failure Modes of Discretionary In-Prompt Summoning
 When multi-agent review is left entirely to the primary model's discretionary judgment:
-* **Model Willingness Variance:** The model may simply choose not to summon sub-agents, or collapse multiple distinct perspectives into a single shallow pass.
+* **Model Willingness Variance:** The model may arbitrarily decide not to summon sub-agents, or collapse multiple distinct perspectives into a single shallow pass.
 * **Complexity Misclassification:** The model can easily misjudge task complexity or relevant domains (e.g. failing to summon a security exploiter when parsing untrusted input, or failing to summon an architecture auditor during domain model changes).
-* **The ROI & Quota Trap:**
-  > *"You don't want to summon your entire army to conquer a small village: the ROI is bad and you rapidly reach your rate limits and token quotas."*
-  Fanning out 7 parallel pro-tier agents for a minor typo or one-line refactor produces negative return on investment and quickly exhausts API quotas.
+* **The ROI & Quota Trap:** Fanning out 7 parallel pro-tier agents to review a minor typo or one-line refactor produces negative return on investment, introduces severe latency, and rapidly exhausts API rate limits and token quotas. Summoning an entire army to conquer a small village is an anti-pattern: the level of verification must be proportional to the blast radius and risk of the task.
 
 ### The Reliable Evolution: Enforced Workflow Pipelines
 A production-grade, highly reliable implementation moves beyond pure in-prompt prompting into a **deterministic workflow pipeline**:
@@ -51,7 +49,35 @@ A production-grade, highly reliable implementation moves beyond pure in-prompt p
 
 ---
 
-## 4. Multi-Domain Adversarial Catalogs
+## 4. Going Further: Heterogeneous Tool-Augmented Verification (The TUMIX Paradigm)
+
+The frontier of agentic evaluation moves beyond pure text-based debate into **heterogeneous, tool-augmented verification**.
+
+Recent breakthroughs in multi-agent test-time scaling—notably the **TUMIX (Tool-Use Mixture)** framework ([Google Research, MIT, Harvard, 2025](https://arxiv.org/abs/2502.18685))—demonstrate that multi-agent ensembles achieve significantly higher task completion and verification accuracy when agents employ **diverse tool strategies and reasoning modalities** rather than homogeneous text analysis.
+
+Applying the TUMIX paradigm to adversarial review transforms reviewers from passive readers into active falsifiers:
+
+### A. Empirical Sandbox Verification (Code Execution)
+* **Limitation of Text-Only Review:** A language model reading code can hallucinate that an algorithm has linear complexity or that an edge-case is handled.
+* **Tool-Augmented Remedy:** Equipping reviewer agents with an isolated execution sandbox enables them to:
+  * Synthesize and execute generative fuzz tests against the modified code.
+  * Run mutation testing suites to verify if existing tests actually catch condition flips.
+  * Empirically profile memory allocation and execution time under load.
+
+### B. Formal Logic Verification (TLA+ & SMT Solvers)
+* **Limitation of Text-Only Review:** Complex state machines, distributed locks, and retry/reconciliation protocols cannot be exhaustively verified by mental simulation.
+* **Tool-Augmented Remedy:** Equipping an architectural reviewer agent with formal methods tools:
+  * Automatically translating stateful transitions into formal TLA+ specifications.
+  * Running model checkers (e.g. TLC or Z3 SMT solvers) to mathematically verify safety invariants (*"invalid state is never reached"*) and liveness (*"protocol never deadlocks"*).
+
+### C. Adaptive Early Termination via LLM-as-Judge
+Running multiple tool-augmented verification rounds can become computationally expensive. TUMIX addresses this by deploying an **LLM-as-Judge (Chief Justice)** monitoring cross-agent consensus:
+* The review loop terminates early the moment a critical P0 exploit is concretely proven, or once high consensus is reached among diverse verification lenses.
+* This preserves empirical verification rigor while slashing token consumption and inference overhead by up to 50%.
+
+---
+
+## 5. Multi-Domain Adversarial Catalogs
 
 The core protocol is domain-agnostic. Dedicated attack vectors and Proof-of-Failure contracts are maintained in modular reference catalogs:
 
@@ -59,17 +85,6 @@ The core protocol is domain-agnostic. Dedicated attack vectors and Proof-of-Fail
 * **[Commercial Contracts & Legal Agreements](skills/review-work-efficiently/references/domains/legal-and-contracts.md):** Liability traps, milestone ambiguity, clause contradictions, jurisdiction risks, and scope creep.
 * **[Personal Finance, Taxes & Wealth Strategy](skills/review-work-efficiently/references/domains/finance-and-tax.md):** Statutory non-compliance, substantiation paper trails, formula precision, entity structuring leakage, and optimization intent.
 * **[Argumentative Essays, Research & Strategy Memos](skills/review-work-efficiently/references/domains/writing-and-research.md):** Defamation/IP risk, citation verification, logical fallacies, narrative flow, and executive persuasiveness.
-
----
-
-## 5. Harness-Agnostic Execution Adapters
-
-This protocol can be deployed across any modern agentic environment. Concrete implementation templates are provided in:
-
-* **[Antigravity CLI & Python Workflows](skills/review-work-efficiently/references/harness-adapters/antigravity.md)**
-* **[Claude Code Subagents](skills/review-work-efficiently/references/harness-adapters/claude-code.md)**
-* **[OpenAI Swarm & Operator](skills/review-work-efficiently/references/harness-adapters/openai-swarm.md)**
-* **[Generic Multi-Agent Loop](skills/review-work-efficiently/references/harness-adapters/generic-agentic-loop.md)**
 
 ---
 
@@ -88,16 +103,11 @@ This protocol can be deployed across any modern agentic environment. Concrete im
     └── review-work-efficiently/
         ├── SKILL.md
         └── references/
-            ├── domains/
-            │   ├── software-engineering.md
-            │   ├── legal-and-contracts.md
-            │   ├── finance-and-tax.md
-            │   └── writing-and-research.md
-            └── harness-adapters/
-                ├── antigravity.md
-                ├── claude-code.md
-                ├── openai-swarm.md
-                └── generic-agentic-loop.md
+            └── domains/
+                ├── software-engineering.md
+                ├── legal-and-contracts.md
+                ├── finance-and-tax.md
+                └── writing-and-research.md
 ```
 
 ---

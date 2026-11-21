@@ -27,6 +27,14 @@ In single-agent software development and autonomous reasoning, relying on a mode
 
 ---
 
+
+### D. Multi-Agent Test-Time Scaling via Heterogeneous Tool-Use (TUMIX)
+* **Literature Reference:** TUMIX: Multi-Agent Test-Time Scaling via Tool-Use Mixture (Google Research, Google DeepMind, MIT, Harvard, 2025).
+* **Mechanism:** Homogeneous multi-agent debate (where all agents perform text-only reasoning) plateaus rapidly because models share common blind spots. By contrast, an ensemble where agents use **heterogeneous tool strategies** (combining code execution, formal verification, web retrieval, and analytical reasoning) breaks shared mode collapse and dramatically boosts task success.
+* **Empirical Consequence:** In adversarial review, arming agents with empirical code execution (fuzzing, mutation testing) and formal verification (TLA+, model checkers) converts subjective critique into mathematical falsification.
+
+---
+
 ## 2. Epistemological Framework: Popperian Falsificationism
 
 The architecture replaces naive verification (*"Confirm that this artifact works"*) with Karl Popper's epistemology of **Critical Rationalism (Conjectures and Refutations)**:
