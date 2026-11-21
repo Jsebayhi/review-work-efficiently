@@ -29,7 +29,7 @@ When building agentic evaluation, teams face a choice between **in-prompt discre
 
 ## 2. The Quota and ROI Principle
 
-> *"You don't want to summon your entire army to conquer a small village: the ROI is bad and you rapidly reach your rate limits and token quotas."*
+**The ROI & Quota Trap:** Fanning out 7 parallel pro-tier agents to review a minor typo or one-line refactor produces negative return on investment, introduces severe latency, and rapidly exhausts API rate limits and token quotas. Summoning an entire army to conquer a small village is an anti-pattern: the level of verification must be proportional to the blast radius and risk of the task.
 
 A common pitfall in multi-agent system design is **indiscriminate fan-out**. Running 7 parallel reasoning models (e.g. `pro` tier) on a 3-line README edit or CSS tweak causes:
 * Excessive token burn with zero risk reduction.

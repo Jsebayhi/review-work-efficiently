@@ -40,7 +40,7 @@ Evaluate the blast radius of the artifact to select the appropriate number of or
 
 ### Step 3: Quarantined Parallel Dispatch
 
-Spawn the selected specialist sub-agents concurrently in isolated contexts using your harness's sub-agent primitives. For platform-specific invocation syntax, consult [harness-adapters](references/harness-adapters/).
+Spawn the selected specialist sub-agents concurrently in isolated contexts using your environment's native sub-agent or multi-agent execution primitives.
 
 Every sub-agent prompt must include:
 1. **The Focus Attack Targets**: Injected from the domain reference file.
