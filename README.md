@@ -20,7 +20,7 @@ This architecture is grounded in foundational research across cognitive science,
 
 * **Why Single-Agent Review Fails:** Autoregressive models experience **Degeneration-of-Thought (DoT)** when reviewing their own output in the same context window ([Li et al., 2023](https://arxiv.org/abs/2307.03987)), display **Machine Sycophancy** from RLHF training priors ([Sharma et al., 2023](https://arxiv.org/abs/2310.13548); [Perez et al., 2022](https://arxiv.org/abs/2212.09251)), and fail to achieve genuine self-correction without external perspective diversity ([Huang et al., 2023](https://arxiv.org/abs/2308.03188)).
 * **The Multi-Agent Debate Solution:** Deploying independent model instances to construct, critique, and debate candidate solutions over separate reasoning paths significantly outperforms single-agent generation and self-reflection ([Du et al., 2023](https://arxiv.org/abs/2305.14325); [Liang et al., 2023](https://arxiv.org/abs/2305.19118)). Differentiated reviewer personas prevent groupthink and achieve human-expert evaluation quality ([Chan et al., 2023](https://arxiv.org/abs/2308.07201)).
-* **Popperian Critical Rationalism:** Moving from confirmation bias (*"confirm this works"*) to Popperian falsificationism ([Popper, 1959](https://en.wikipedia.org/wiki/The_Logic_of_Scientific_Discovery)), enforcing strict **Proof-of-Failure (PoF)** contracts and context quarantine.
+* **Agentic Falsification & Critical Rationalism:** Moving from confirmation bias (*"confirm this works"*) to active falsificationism as formalized in agentic literature ([Huang et al., Stanford 2025 - POPPER](https://arxiv.org/abs/2502.09858); [arXiv:2604.02485](https://arxiv.org/abs/2604.02485)), enforcing strict **Proof-of-Failure (PoF)** contracts and context quarantine.
 
 👉 *For the complete epistemological and mathematical breakdown, see [docs/01-theoretical-foundations.md](docs/01-theoretical-foundations.md).*
 
@@ -67,7 +67,7 @@ Applying the TUMIX paradigm extends adversarial reviewers from analytical critic
 ### B. Formal Logic Verification (TLA+ & SMT Solvers)
 * **The Opportunity:** Extending inspection of state machines, distributed locks, and retry/reconciliation protocols into mathematical proof.
 * **Tool-Augmented Verification:** Equipping an architectural reviewer agent with formal methods tools:
-  * Automatically translating stateful transitions into formal TLA+ specifications ([Lamport, 2002](https://en.wikipedia.org/wiki/TLA%2B)).
+  * Automatically translating stateful transitions into formal TLA+ specifications and verifying invariants via model checkers and agentic proof solvers ([arXiv:2606.05792](https://arxiv.org/abs/2606.05792); [arXiv:2610.14923](https://arxiv.org/abs/2610.14923)).
   * Running model checkers (e.g. TLC or Z3 SMT solvers) to mathematically verify safety invariants (*"invalid state is never reached"*) and liveness (*"protocol never deadlocks"*).
 
 ### C. Adaptive Early Termination via LLM-as-Judge
