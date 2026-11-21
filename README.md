@@ -16,11 +16,11 @@ Rather than relying on a single generalist model to self-review its own output, 
 
 ## 2. Theoretical Foundations & Academic Provenance
 
-This architecture directly addresses three failure modes documented in AI safety and reasoning literature:
+This architecture is grounded in foundational research across cognitive science, multi-agent systems, and epistemology:
 
-* **Degeneration-of-Thought (DoT):** Autoregressive models experience a collapse in cognitive entropy when reviewing their own output in the same context window, rationalizing their earlier mistakes ([Li et al., 2023](https://arxiv.org/abs/2307.03987)).
-* **Machine Sycophancy:** Models trained via RLHF default to agreeable, polite padding rather than reporting severe runtime failures or structural bugs ([Sharma et al., 2023](https://arxiv.org/abs/2310.13548); [Perez et al., 2022](https://arxiv.org/abs/2212.09251)).
-* **Single-Agent Self-Correction Limits:** Single-agent self-refine loops frequently swap one hallucination for another without genuine perspective diversity ([Huang et al., 2023](https://arxiv.org/abs/2308.03188)).
+* **Why Single-Agent Review Fails:** Autoregressive models experience **Degeneration-of-Thought (DoT)** when reviewing their own output in the same context window ([Li et al., 2023](https://arxiv.org/abs/2307.03987)), display **Machine Sycophancy** from RLHF training priors ([Sharma et al., 2023](https://arxiv.org/abs/2310.13548); [Perez et al., 2022](https://arxiv.org/abs/2212.09251)), and fail to achieve genuine self-correction without external perspective diversity ([Huang et al., 2023](https://arxiv.org/abs/2308.03188)).
+* **The Multi-Agent Debate Solution:** Deploying independent model instances to construct, critique, and debate candidate solutions over separate reasoning paths significantly outperforms single-agent generation and self-reflection ([Du et al., 2023](https://arxiv.org/abs/2305.14325); [Liang et al., 2023](https://arxiv.org/abs/2305.19118)). Differentiated reviewer personas prevent groupthink and achieve human-expert evaluation quality ([Chan et al., 2023](https://arxiv.org/abs/2308.07201)).
+* **Popperian Critical Rationalism:** Moving from confirmation bias (*"confirm this works"*) to Popperian falsificationism ([Popper, 1959](https://en.wikipedia.org/wiki/The_Logic_of_Scientific_Discovery)), enforcing strict **Proof-of-Failure (PoF)** contracts and context quarantine.
 
 👉 *For the complete epistemological and mathematical breakdown, see [docs/01-theoretical-foundations.md](docs/01-theoretical-foundations.md).*
 
@@ -49,31 +49,29 @@ A production-grade, highly reliable implementation moves beyond pure in-prompt p
 
 ---
 
-## 4. Going Further: Heterogeneous Tool-Augmented Verification (The TUMIX Paradigm)
+## 4. Going Further: Augmenting Reviewers with Heterogeneous Tools (The TUMIX Paradigm)
 
-The frontier of agentic evaluation moves beyond pure text-based debate into **heterogeneous, tool-augmented verification**.
+While multi-agent debate establishes cognitive diversity in reasoning, the next capability frontier compounds this by equipping reviewer agents with **heterogeneous verification tools**.
 
-Recent breakthroughs in multi-agent test-time scaling—notably the **TUMIX (Tool-Use Mixture)** framework ([Google Research, MIT, Harvard, 2025](https://arxiv.org/abs/2502.18685))—demonstrate that multi-agent ensembles achieve significantly higher task completion and verification accuracy when agents employ **diverse tool strategies and reasoning modalities** rather than homogeneous text analysis.
+Recent breakthroughs in multi-agent test-time scaling—notably the **TUMIX (Tool-Use Mixture)** framework ([Google Research, Google DeepMind, MIT, Harvard, 2025](https://arxiv.org/abs/2502.18685))—demonstrate that multi-agent teams achieve significantly higher task completion and verification accuracy when agents employ **diverse tool strategies and reasoning modalities** rather than relying on a single uniform approach.
 
-Applying the TUMIX paradigm to adversarial review transforms reviewers from passive readers into active falsifiers:
+Applying the TUMIX paradigm extends adversarial reviewers from analytical critics into active falsifiers:
 
 ### A. Empirical Sandbox Verification (Code Execution)
-* **Limitation of Text-Only Review:** A language model reading code can hallucinate that an algorithm has linear complexity or that an edge-case is handled.
-* **Tool-Augmented Remedy:** Equipping reviewer agents with an isolated execution sandbox enables them to:
+* **The Opportunity:** Moving from static code reading to empirical execution.
+* **Tool-Augmented Verification:** Equipping reviewer agents with an isolated execution sandbox enables them to:
   * Synthesize and execute generative fuzz tests against the modified code.
   * Run mutation testing suites to verify if existing tests actually catch condition flips.
   * Empirically profile memory allocation and execution time under load.
 
 ### B. Formal Logic Verification (TLA+ & SMT Solvers)
-* **Limitation of Text-Only Review:** Complex state machines, distributed locks, and retry/reconciliation protocols cannot be exhaustively verified by mental simulation.
-* **Tool-Augmented Remedy:** Equipping an architectural reviewer agent with formal methods tools:
-  * Automatically translating stateful transitions into formal TLA+ specifications.
+* **The Opportunity:** Extending inspection of state machines, distributed locks, and retry/reconciliation protocols into mathematical proof.
+* **Tool-Augmented Verification:** Equipping an architectural reviewer agent with formal methods tools:
+  * Automatically translating stateful transitions into formal TLA+ specifications ([Lamport, 2002](https://en.wikipedia.org/wiki/TLA%2B)).
   * Running model checkers (e.g. TLC or Z3 SMT solvers) to mathematically verify safety invariants (*"invalid state is never reached"*) and liveness (*"protocol never deadlocks"*).
 
 ### C. Adaptive Early Termination via LLM-as-Judge
-Running multiple tool-augmented verification rounds can become computationally expensive. TUMIX addresses this by deploying an **LLM-as-Judge (Chief Justice)** monitoring cross-agent consensus:
-* The review loop terminates early the moment a critical P0 exploit is concretely proven, or once high consensus is reached among diverse verification lenses.
-* This preserves empirical verification rigor while slashing token consumption and inference overhead by up to 50%.
+Running multiple tool-augmented verification rounds can become computationally expensive. As demonstrated in TUMIX, deploying an **LLM-as-Judge (Chief Justice)** monitoring cross-agent consensus allows the review loop to terminate early as soon as an indisputable bug is proven or consensus is reached, slashing token consumption and latency by up to 50%.
 
 ---
 
